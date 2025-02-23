@@ -1,26 +1,26 @@
 #include "bus.h"
 
 Bus::Bus(){
- // Connecting the devices with the bus
- cpu.ConnectBus(this);
- od.ConnectBus(this);
+    // Connecting the devices with the bus
+    cpu.ConnectBus(this);
+    od.ConnectBus(this);
 
- // Clearing 
- for(BYTE i : ram){
-    ram[i] = 0x00;
- }
+    // Clearing 
+    for(BYTE &i : ram){
+        i = 0x00;
+    }
 
- for(BYTE i : stack){
-    stack[i] = 0x00;
- }
+    for(BYTE &i : stack){
+        i = 0x00;
+    }
 
- for(BYTE i : zeropage){
-    zeropage[i] = 0x00;
- }
+    for(BYTE &i : zeropage){
+        i = 0x00;
+    }
 
- for(BYTE i : odRAM){
-    odRAM[i] = 0x00;
- }
+    for(BYTE &i : odRAM){
+        i = 0x00;
+    }
 };
 
 Bus::~Bus(){
@@ -61,4 +61,15 @@ void Bus::write(WORD addr, BYTE data){
 
     else if(addr >= 0x0400 && addr <= 0x0404)
         odRAM[addr - 0x0400] = data;
+}
+
+void Bus::loadProgram(std::string program){
+    std::stringstream stream(program);
+    WORD offset = 0x2000;   // Program starts at 0x2000
+    while(!stream.eof()){
+        std::string ins;
+        stream >> ins;
+        write(offset, std::stoul(ins, nullptr, 16));
+        offset++;
+    }
 }
