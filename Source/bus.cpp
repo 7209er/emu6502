@@ -4,7 +4,8 @@ Bus::Bus(){
     // Connecting the devices with the bus
     cpu.ConnectBus(this);
     od.ConnectBus(this);
-
+    dd.ConnectBus(this);
+    
     // Clearing 
     for(BYTE &i : ram){
         i = 0x00;
@@ -21,6 +22,10 @@ Bus::Bus(){
     for(BYTE &i : odRAM){
         i = 0x00;
     }
+
+    for(BYTE &i : ddRAM){
+        i = 0x00;
+    }
 };
 
 Bus::~Bus(){
@@ -31,6 +36,7 @@ Bus::~Bus(){
 void Bus::clock(){
     cpu.clock();
     od.clock();
+    dd.clock();
 }
 
 BYTE Bus::read(WORD addr){
@@ -45,6 +51,9 @@ BYTE Bus::read(WORD addr){
 
     else if(addr >= 0x0400 && addr <= 0x0404)
         return odRAM[addr - 0x0400];
+
+    else if(addr >= 0x0500 && addr <= 0x0502)
+        return ddRAM[addr - 0x0500];
 
     return 0;
 }
@@ -61,6 +70,9 @@ void Bus::write(WORD addr, BYTE data){
 
     else if(addr >= 0x0400 && addr <= 0x0404)
         odRAM[addr - 0x0400] = data;
+    
+    else if(addr >= 0x0500 && addr <= 0x0502)
+        ddRAM[addr - 0x0500] = data;
 }
 
 void Bus::loadProgram(std::string program){
@@ -72,4 +84,12 @@ void Bus::loadProgram(std::string program){
         write(offset, std::stoul(ins, nullptr, 16));
         offset++;
     }
+}
+
+bool Bus::shouldTerminate(){
+    return terminationFlag;
+}
+
+void Bus::setTermination(){
+    terminationFlag = true;
 }

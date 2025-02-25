@@ -18,10 +18,16 @@ BYTE OutputDevice::read(WORD addr){
     return bus->read(addr);
 }
 
+// An output occurs each time that a value has changed
+// Both values can change at the same "transaction" (Reset)
+// so no if else.
 void OutputDevice::clock(){
-    if(first != read(0x400) || second != read(0x401)){
+    if(first != read(0x400)){
         first = read(0x400);
+        printf("First: %d\n", first);
+    }
+    if(second != read(0x401)){
         second = read(0x401);
-        printf("First: %d, Second: %d\n", first, second);
+        printf("Second: %d\n", second);
     }
 }
