@@ -1,4 +1,24 @@
 ## Update
+Added an Assambler. So now it's possible to write a program in Assembly and it will
+be convertet into machine code using Assembly::convert(). 
+
+Syntax of addressing modes:
+Accumulator: A
+Immediate: #1A
+Zero Page: $1A
+Zero Page X: $1A,X
+Zero Page Y: $1A,Y
+Relative: $1A
+Absolute: $001A
+Absolute X: $001A,X
+Absolute Y: $001A,Y
+Indirect: ($001A)
+Indirect X: (1A,X)
+Indirect Y: ($1A),Y
+*All values are in hex*
+
+
+## Update
 I added the DrawingDevice class, which enables the CPU to draw quadrilaterals.
 DrawingDevice lives on the bus and functions as a tiny drawing device. Under the
 hood it uses OpenGL to draw the figures. To access it, simply write data into 0x0500
