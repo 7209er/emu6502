@@ -2,20 +2,20 @@
 Added an Assambler. So now it's possible to write a program in Assembly and it will
 be convertet into machine code using Assembly::convert(). 
 
-Syntax of addressing modes:
-Accumulator: A
-Immediate: #1A
-Zero Page: $1A
-Zero Page X: $1A,X
-Zero Page Y: $1A,Y
-Relative: $1A
-Absolute: $001A
-Absolute X: $001A,X
-Absolute Y: $001A,Y
-Indirect: ($001A)
-Indirect X: (1A,X)
-Indirect Y: ($1A),Y
-*All values are in hex*
+Syntax of addressing modes:\
+Accumulator: A\
+Immediate: #1A\
+Zero Page: $1A\
+Zero Page X: $1A,X\
+Zero Page Y: $1A,Y\
+Relative: $1A\
+Absolute: $001A\
+Absolute X: $001A,X\
+Absolute Y: $001A,Y\
+Indirect: ($001A)\
+Indirect X: (1A,X)\
+Indirect Y: ($1A),Y\
+*All values are in hex*\
 
 
 ## Update
@@ -25,9 +25,9 @@ hood it uses OpenGL to draw the figures. To access it, simply write data into 0x
 to 0x0501. If 0x1 is written into 0x0502, the DrawingDevice will read the new data and
 updates a vertex (consisting of to BYTES/ a x- and y-coordinate). As OpenGL works with 
 a range from -1 to 1, the BYTES now have to be interpreted as signed. You can simply
-put in a coordinate from -128 to 127 and it will get converet automaticaly to a -1 to 1 float.
+put in a coordinate from -128 to 127 and it will get converet automaticaly to a -1 to 1 float.\
 *For OpenGL to work, you have to set up MESA, GLFW, GLAD and GLEW accordingly*
-*and include glad.h/glfw3.h and have glad.c in your repository*
+*and include glad.h/glfw3.h and have glad.c in your repository*\
 Also there is a little OpenGL-setup debug mode by using DEBUG=-DDEBUG with the make command.
 
 ## Original Text
