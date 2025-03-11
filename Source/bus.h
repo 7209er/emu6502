@@ -23,7 +23,7 @@ public:
 private:
     BYTE ram[60 * 1024]; // 60kB of RAM from 0x1000 - 0xFFFF
     BYTE stack[256];     // 0x0100 - 0x01FF
-    BYTE zeropage[256];  // 0x0000 - 0x0000
+    BYTE zeropage[256];  // 0x0000 - 0x00FF
     BYTE odRAM[5];       // 0x0400 - 0x0404
     BYTE ddRAM[3];       // 0x0500 - 0x0502
 
